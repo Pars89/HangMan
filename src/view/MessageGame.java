@@ -2,31 +2,84 @@ package view;
 
 public class MessageGame {
 
-    private String targetWord;
-    private StringBuilder hiddenWord;
-
-
-    public MessageGame(String targetWord) {
-        this.targetWord = targetWord;
-        hiddenWord = new StringBuilder();
-        for (int i = 0; i < targetWord.length(); i++) {
-            hiddenWord.append("_");
-        }
-    }
-
-    public void change_state(char charAt) {
-        for (int i = 0; i < targetWord.length(); i++) {
-            if (targetWord.charAt(i) == charAt) {
-                hiddenWord.setCharAt(i, charAt);
+    private static final String[][] PICTURES_HANGMAN_STATE = {
+            {
+                    "  __________   ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            "
+            },
+            {
+                    "  __________   ",
+                    "  |        |   ",
+                    "  |        |   ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            "
+            },
+            {
+                    "  __________   ",
+                    "  |        |   ",
+                    "  |        |   ",
+                    "  |        O   ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            "
+            },
+            {
+                    "  __________   ",
+                    "  |        |   ",
+                    "  |        |   ",
+                    "  |        O   ",
+                    "  |            ",
+                    "  |            ",
+                    "  |            ",
+                    "  |       ___  ",
+                    "  |       | |  "
+            },
+            {
+                    "  __________   ",
+                    "  |        |   ",
+                    "  |        |   ",
+                    "  |        O   ",
+                    "  |       '|'  ",
+                    "  |       -0-  ",
+                    "  |       / \\ ",
+                    "  |       ___  ",
+                    "  |       | |  "
+            },
+            {
+                    "  __________   ",
+                    "  |        |   ",
+                    "  |        |   ",
+                    "  |        O   ",
+                    "  |       '|'  ",
+                    "  |       -0-  ",
+                    "  |       / \\ ",
+                    "  |            ",
+                    "  |            "
             }
+    };
+
+    public static void printPicture(int numberState) {
+        String[] picture = PICTURES_HANGMAN_STATE[numberState];
+
+        for(String line : picture) {
+            System.out.println(line);
         }
     }
 
-    public void printHiddenWord() {
-        System.out.println("Слово: " + hiddenWord.toString());
-    }
-
-    public void printTargetWord() {
+    public static void printWord(String targetWord) {
         System.out.println("Слово: " + targetWord);
     }
 
@@ -34,12 +87,8 @@ public class MessageGame {
         System.out.print("Введите букву: ");
     }
 
-    public static void printSingleLetterRequiredMessage() {
-        System.out.println("Вы должны ввести только одну букву!");
-    }
-
-    public static void printOnlySmallRussianLettersRequiredMessage() {
-        System.out.println("Вы должны ввести только букву [а-я]");
+    public static void printOnlyOneRussianLetterRequiredMessage() {
+        System.out.println("Вы должны ввести только одну русскую букву");
     }
 
     public static void printTaskInformation() {
@@ -58,83 +107,7 @@ public class MessageGame {
         System.out.println("Вы уже использовали эту букву!");
     }
 
-    public String getTargetWord() {
-        return targetWord;
-    }
-
-    public StringBuilder getHiddenWord() {
-        return hiddenWord;
-    }
-
-    public void printGallows(int wrongGuesses) {
-        System.out.println();
-        switch (wrongGuesses) {
-            case 1:
-                System.out.println("  __________    Количество ошибок: " + wrongGuesses);
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("__|__");
-                break;
-            case 2:
-                System.out.println("  __________    Количество ошибок: " + wrongGuesses);
-                System.out.println("  |        |");
-                System.out.println("  |        |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("__|__");
-                break;
-            case 3:
-                System.out.println("  __________    Количество ошибок: " + wrongGuesses);
-                System.out.println("  |        |");
-                System.out.println("  |        |");
-                System.out.println("  |        0");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("__|__");
-                break;
-            case 4:
-                System.out.println("  __________    Количество ошибок: " + wrongGuesses);
-                System.out.println("  |        |");
-                System.out.println("  |        |");
-                System.out.println("  |        0");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |");
-                System.out.println("  |       ___");
-                System.out.println("__|__     | |");
-                break;
-            case 5:
-                System.out.println("  __________    Количество ошибок: " + wrongGuesses);
-                System.out.println("  |        |");
-                System.out.println("  |        |");
-                System.out.println("  |        0");
-                System.out.println("  |       '|'");
-                System.out.println("  |       -0-");
-                System.out.println("  |       / \\");
-                System.out.println("  |       ___");
-                System.out.println("__|__     | |");
-                break;
-            case 6:
-                System.out.println("  __________    Количество ошибок: " + wrongGuesses);
-                System.out.println("  |        |");
-                System.out.println("  |        |");
-                System.out.println("  |        0");
-                System.out.println("  |       '|'");
-                System.out.println("  |       -0-");
-                System.out.println("  |       / \\");
-                System.out.println("  |");
-                System.out.println("__|__");
-                break;
-        }
+    public static void printCountError(int countError) {
+        System.out.println("Количество ошибок: " + countError);
     }
 }

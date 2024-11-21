@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class RandomWordSelector {
 
+    private static final int EMPTY_LENGTH = 0;
+
     private String fileName;
 
     public RandomWordSelector(String fileName) {
@@ -14,35 +16,38 @@ public class RandomWordSelector {
     }
 
     public String getRandomWord() {
+        StringBuilder rawWords = getWordsFromFile();
+
+        String[] words = rawWords.toString().split(" ");
+
+        if (words.length == EMPTY_LENGTH) {
+            return "";
+        }
+        int randomIndex = getRandomIndex(words.length);
+
+        return words[randomIndex];
+    }
+
+    private StringBuilder getWordsFromFile () {
         StringBuilder words = new StringBuilder();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
-                words.append(line + " ");
+                words.append(line).append(" ");
             }
 
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файла: " + e.getMessage());
             e.printStackTrace();
-            return null;
         }
-        String[] list_words = words.toString().split(" ");
 
-        if (list_words.length == 0) {
-            return null;
-        } else {
-            int randomIndex = getRandomIndex(list_words.length);
-            String targetWord = list_words[randomIndex];
-
-            return targetWord;
-        }
+        return words;
     }
 
-    private static int getRandomIndex(int maxValue) {
-        Random random = new Random();
+    private int getRandomIndex(int maxValue) {
+        Random randomValue = new Random();
 
-        return random.nextInt(maxValue);
+        return randomValue.nextInt(maxValue);
     }
 }

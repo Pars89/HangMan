@@ -1,6 +1,6 @@
 package view;
 
-public class MessageController {
+public class MessageMenu {
     public static void printMainMenu() {
         System.out.println("1. Начать новую игру");
         System.out.println("2. Выйти из приложения");
