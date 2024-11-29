@@ -10,10 +10,10 @@ public class HiddenWord {
     private Set<Character> lettersToGuess;
 
 
-    public HiddenWord(String targetWord) {
-        this.secretWord = targetWord;
+    public HiddenWord(String secretWord) {
+        this.secretWord = secretWord;
         maskedWord = new StringBuilder();
-        for (int i = 0; i < targetWord.length(); i++) {
+        for (int i = 0; i < secretWord.length(); i++) {
             maskedWord.append("_");
         }
         lettersToGuess = getUniqueLetters();

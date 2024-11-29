@@ -10,18 +10,18 @@ public class Menu {
     private static final int MENU_OPTION_EXIT = 2;
 
     public static void start() {
-        int n = 0;
+        int command = 0;
         Scanner scanner = new Scanner(System.in);
 
-        while (n != MENU_OPTION_EXIT) {
+        while (command != MENU_OPTION_EXIT) {
             MessageMenu.printMainMenu();
 
             try {
-                n = scanner.nextInt();
+                command = scanner.nextInt();
 
-                if (n != MENU_OPTION_PLAY && n != MENU_OPTION_EXIT) {
+                if (command != MENU_OPTION_PLAY && command != MENU_OPTION_EXIT) {
                     MessageMenu.printInvalidNumberForMenu();
-                } else if (n == MENU_OPTION_PLAY) {
+                } else if (command == MENU_OPTION_PLAY) {
                     MessageMenu.printGameStarted();
                     new Game().start();
                 }

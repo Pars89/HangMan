@@ -4,7 +4,7 @@ public class Hangman {
 
     private int hangmanState;
 
-    static final int MAX_STATE = 5;
+    private static final int MAX_STATE = 5;
 
     public Hangman() {
         this.hangmanState = 0;

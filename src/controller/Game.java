@@ -17,12 +17,12 @@ public class Game {
 
     public void start() {
 
-        String targetWord = new RandomWordSelector("russian-mnemonic-words.txt").getRandomWord();
+        String secretWord = new RandomWordSelector("russian-mnemonic-words.txt").getRandomWord();
 
-        if (targetWord.isEmpty()) {
+        if (secretWord.isEmpty()) {
             System.out.println("Не удалось найти слово");
         } else {
-            HiddenWord hiddenWord = new HiddenWord(targetWord);
+            HiddenWord hiddenWord = new HiddenWord(secretWord);
 
             boolean won = playGame(hiddenWord);
 
